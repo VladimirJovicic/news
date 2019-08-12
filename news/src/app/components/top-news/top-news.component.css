@@ -1,0 +1,29 @@
+.topNewsDiv {
+    display: flex;
+    position: relative;
+    background-color: green;
+    margin: auto;
+    flex-wrap: wrap;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+.singleNews {
+    background-color: orange;
+    font-size: 15px;
+    margin: auto;
+    display: table;
+    margin-bottom: 3%;
+    margin-top: 3%;
+    border: solid 2px;
+    box-shadow: 5px 5px;
+    border-radius: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 30%;
+}
+
+.centeredSpinner {
+    display: table;
+    margin: auto;
+}
