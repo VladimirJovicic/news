@@ -11,6 +11,8 @@ export class TopNewsComponent implements OnInit {
 
   private topNews : any = {};
   private loading : boolean = true;
+  private noContentMessage : string = "This article has no content!"
+  private gbSelectect : boolean = true;
   constructor(private topNewsServices : TopNewsService) { }
 
   ngOnInit() {

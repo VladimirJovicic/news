@@ -7,6 +7,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { ArticleComponent } from './components/article/article.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     TopNewsComponent,
     CategoriesComponent,
     NavbarComponent,
-    HomepageComponent
+    HomepageComponent,
+    ArticleComponent
   ],
   imports: [
     BrowserModule,

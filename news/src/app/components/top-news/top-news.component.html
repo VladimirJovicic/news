@@ -3,7 +3,9 @@
     <span class="sr-only">Loading...</span>
   </div>
   <div *ngFor="let news of topNews.articles" class="singleNews">
-    <div> {{news.title}} </div>
-    <div> Sadrzaj koji ce biti malo duzi ali fiksiran </div>
+    <div> <b>{{news.title}}</b> </div>
+    <div><img [src]="news.urlToImage != null ? news.urlToImage : './assets/nophoto.jpg'" style="width: 100%; height: 100%"/></div>
+    <div> {{news.content != null ? news.content.substring(0,260) : noContentMessage}}</div>
+    <div class="moreDiv"> <a routerLink="/article">More > </a></div>
   </div>
 </div>
