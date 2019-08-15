@@ -6,8 +6,8 @@ import { TopNewsComponent } from './components/top-news/top-news.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { HomepageComponent } from './components/homepage/homepage.component';
 import { ArticleComponent } from './components/article/article.component';
+import {SharedService} from './services/shared/shared.service'
 
 @NgModule({
   declarations: [
@@ -15,7 +15,6 @@ import { ArticleComponent } from './components/article/article.component';
     TopNewsComponent,
     CategoriesComponent,
     NavbarComponent,
-    HomepageComponent,
     ArticleComponent
   ],
   imports: [
@@ -23,7 +22,7 @@ import { ArticleComponent } from './components/article/article.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule, SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

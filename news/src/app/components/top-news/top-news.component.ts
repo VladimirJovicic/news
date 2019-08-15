@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {TopNewsService} from "../../services/top-news/top-news.service"
+import { ActivatedRoute,Router,NavigationStart } from '@angular/router';
+import {TOP_NEWS_ENDPOINT_US, TOP_NEWS_ENDPOINT_GB} from '../../files/endpoints';
+import {SharedService} from './../../services/shared/shared.service'
 
 @Component({
   selector: 'app-top-news',
@@ -13,10 +16,30 @@ export class TopNewsComponent implements OnInit {
   private loading : boolean = true;
   private noContentMessage : string = "This article has no content!"
   private gbSelectect : boolean = true;
-  constructor(private topNewsServices : TopNewsService) { }
+  private country : string = "";
+  private endpoint : string = "";
+  constructor(private topNewsServices : TopNewsService,
+    private activatedRoute: ActivatedRoute, 
+    private sharedService:SharedService,
+    private router:Router) { 
+      router.events.forEach((event) => {
+        if(event instanceof NavigationStart) {
+          this.loading = true;
+          this.topNews = {};
+          this.ngOnInit();
+        }
+      });
+  }
 
   ngOnInit() {
-    this.topNewsServices.getTopNews().subscribe(
+    if(localStorage.getItem("gbChecked") == "true") {
+      this.endpoint = TOP_NEWS_ENDPOINT_GB;
+    }
+ 
+    if(localStorage.getItem("gbChecked") == "false") {
+     this.endpoint = TOP_NEWS_ENDPOINT_US;
+   }
+        this.topNewsServices.getTopNews(this.endpoint).subscribe(
       (data:any)=> {
         this.topNews = data;
         this.loading = false;

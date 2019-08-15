@@ -1,20 +1,15 @@
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark smallNavBar"> 
     <div class="navbar-nav" style="float: left">
-      <a class="nav-item nav-link active" routerLink="/homepage">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" routerLink="/top-news">Top news</a>
+      <a class="nav-item nav-link" routerLink="/top-news/{{country}}">Top news</a>
       <a class="nav-item nav-link" routerLink="/categories">Categories</a>
       
     </div>
 
     <div style="float: right">
-      <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-primary active">
-            <input type="checkbox" name="options" autocomplete="off" checked> GB
-        </label>
-        <label class="btn btn-primary">
-            <input type="checkbox" name="options" autocomplete="off"> US
-        </label>
-    </div>
+      <button type="button" class="btn btn-dark" 
+          [ngStyle]="{'background-color': gbChecked ? 'black' : null }" (click)="activateGB()">GB</button>
+      <button type="button" class="btn btn-dark" 
+        [ngStyle]="{'background-color': !gbChecked ? 'black' : null }" (click)=activateUS()>US</button>
     </div>
     
 </nav>
