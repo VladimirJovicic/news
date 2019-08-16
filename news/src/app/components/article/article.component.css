@@ -1,0 +1,17 @@
+.articleDiv {
+    margin-bottom: 2%;
+    display: table;
+    margin: auto;
+}
+
+h3 {
+    color: wheat;
+}
+
+.contentDiv {
+    color: wheat;
+    margin-top: 3%;
+    font-size: 100%;
+    text-align: justify;
+  text-justify: inter-word;
+}

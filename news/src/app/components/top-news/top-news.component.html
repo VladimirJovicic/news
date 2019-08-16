@@ -1,4 +1,5 @@
-<div class="topNewsDiv">
+<div class="mainContent">
+  <div class="titleDiv" *ngIf="!loading">Top news from {{country}}</div>
   <div class="spinner-border centeredSpinner" role="status" *ngIf="loading">
     <span class="sr-only">Loading...</span>
   </div>
@@ -6,6 +7,6 @@
     <div> <b>{{news.title}}</b> </div>
     <div><img [src]="news.urlToImage != null ? news.urlToImage : './assets/nophoto.jpg'" style="width: 100%; height: 100%"/></div>
     <div> {{news.content != null ? news.content.substring(0,260) : noContentMessage}}</div>
-    <div class="moreDiv"> <a routerLink="/article">More > </a></div>
+    <div class="moreDiv"> <a routerLink="/article" (click)="setArticle(news)">More > </a></div>
   </div>
 </div>

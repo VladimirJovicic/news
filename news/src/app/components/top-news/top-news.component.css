@@ -1,13 +1,3 @@
-.topNewsDiv {
-    display: flex;
-    position: relative;
-    background-color: rgb(226, 7, 7);
-    margin: auto;
-    flex-wrap: wrap;
-    padding-top: 3%;
-    padding-bottom: 3%;
-}
-
 .singleNews {
     background-color: rgb(20, 6, 6);
     font-size: 15px;
@@ -23,6 +13,14 @@
     padding-bottom: 15px;
     width: 30%;
     color: wheat;
+}
+
+.titleDiv {
+    text-align: center;
+    width: 100%;
+    color: wheat;
+    font-size: 200%;
+    font-weight: bold;
 }
 
 .moreDiv {

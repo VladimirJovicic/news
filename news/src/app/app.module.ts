@@ -7,7 +7,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ArticleComponent } from './components/article/article.component';
-import {SharedService} from './services/shared/shared.service'
+import {SharedService} from './services/shared/shared.service';
 
 @NgModule({
   declarations: [

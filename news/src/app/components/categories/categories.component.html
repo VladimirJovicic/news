@@ -1,3 +1,43 @@
-<p>
-  categories works!
-</p>
+<div class="spinner-border centeredSpinner" role="status" *ngIf="loadingEntertainments">
+    <span class="sr-only">Loading...</span>
+  </div>
+<div *ngFor="let entertainment of entertainments">
+    {{entertainment.title}}
+</div>
+--------
+<div class="spinner-border centeredSpinner" role="status" *ngIf="loadingGenerals">
+    <span class="sr-only">Loading...</span>
+  </div>
+<div *ngFor="let general of generals">
+    {{general.title}}
+</div>
+--------
+<div class="spinner-border centeredSpinner" role="status" *ngIf="loadingHealts">
+    <span class="sr-only">Loading...</span>
+  </div>
+<div *ngFor="let health of healths">
+    {{health.title}}
+</div>
+--------
+<div class="spinner-border centeredSpinner" role="status" *ngIf="loadingScience">
+    <span class="sr-only">Loading...</span>
+  </div>
+<div *ngFor="let scienceArticle of science">
+    {{scienceArticle.title}}
+</div>
+--------
+<div class="spinner-border centeredSpinner" role="status" *ngIf="loadingSports">
+    <span class="sr-only">Loading...</span>
+  </div>
+<div *ngFor="let sport of sports">
+    {{sport.title}}
+</div>
+--------
+<div class="spinner-border centeredSpinner" role="status" *ngIf="loadingTechnologies">
+    <span class="sr-only">Loading...</span>
+  </div>
+<div *ngFor="let technology of technologies">
+    {{technology.title}}
+</div>
+
+

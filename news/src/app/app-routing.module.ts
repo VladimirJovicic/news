@@ -7,7 +7,7 @@ import {ArticleComponent} from './components/article/article.component'
 const routes: Routes = [
   { path: '', component: TopNewsComponent, pathMatch:"full" },
   { path: 'top-news/:country', component: TopNewsComponent },
-  { path: 'categories', component: CategoriesComponent },
+  { path: 'categories/:country', component: CategoriesComponent },
   { path: 'article', component: ArticleComponent }
 ];
 

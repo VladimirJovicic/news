@@ -1,15 +1,14 @@
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark smallNavBar"> 
     <div class="navbar-nav" style="float: left">
       <a class="nav-item nav-link" routerLink="/top-news/{{country}}">Top news</a>
-      <a class="nav-item nav-link" routerLink="/categories">Categories</a>
-      
+      <a class="nav-item nav-link" routerLink="/categories/{{country}}">Categories</a>
     </div>
-
     <div style="float: right">
-      <button type="button" class="btn btn-dark" 
-          [ngStyle]="{'background-color': gbChecked ? 'black' : null }" (click)="activateGB()">GB</button>
-      <button type="button" class="btn btn-dark" 
-        [ngStyle]="{'background-color': !gbChecked ? 'black' : null }" (click)=activateUS()>US</button>
+      <button type="button" class="btn btn-dark buttonLan" 
+          [ngStyle]="{'background-color': gbChecked ? 'black' : null }" 
+          (click)="activateGB()" [disabled]="sharedService.lanButtonsDisabled">GB</button>
+      <button type="button" class="btn btn-dark buttonLan" 
+        [ngStyle]="{'background-color': !gbChecked ? 'black' : null }"
+        (click)=activateUS() [disabled]="sharedService.lanButtonsDisabled">US</button>
     </div>
-    
 </nav>

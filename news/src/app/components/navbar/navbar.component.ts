@@ -11,9 +11,11 @@ export class NavbarComponent implements OnInit {
 
   private gbChecked;
   private country : string = "";
-  constructor(private sharedService : SharedService,private router: Router) {}
+  constructor(private sharedService : SharedService,private router: Router) {
+  }
 
   ngOnInit() {
+    
    if(localStorage.getItem("gbChecked") == "true") {
      this.country = "gb";
    }
@@ -28,7 +30,12 @@ export class NavbarComponent implements OnInit {
     this.sharedService.setGbChecker(false)
     this.gbChecked = true;
     localStorage.setItem("gbChecked", "true");
-    this.router.navigate(['/top-news/gb']);
+    if(this.router.url.split("/")[1]=="categories") {
+      this.router.navigate(['/categories/gb']);
+    }
+    if(this.router.url.split("/")[1]=="top-news") {
+      this.router.navigate(['/top-news/gb']);
+    }
   }
 
   activateUS() {
@@ -36,6 +43,11 @@ export class NavbarComponent implements OnInit {
     this.sharedService.setGbChecker(false)
     this.gbChecked = false;
     localStorage.setItem("gbChecked", "false");
-    this.router.navigate(['/top-news/us']);
+    if(this.router.url.split("/")[1]=="categories") {
+      this.router.navigate(['/categories/us']);
+    }
+    if(this.router.url.split("/")[1]=="top-news") {
+      this.router.navigate(['/top-news/us']);
+    }
   }
 }

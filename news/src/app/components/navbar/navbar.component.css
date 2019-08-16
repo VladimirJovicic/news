@@ -3,3 +3,7 @@
     display: table;
     width: 65%;
 }
+
+.buttonLan:disabled {
+    cursor: not-allowed;
+}

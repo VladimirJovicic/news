@@ -15,7 +15,6 @@ export class TopNewsComponent implements OnInit {
   private topNews : any = {};
   private loading : boolean = true;
   private noContentMessage : string = "This article has no content!"
-  private gbSelectect : boolean = true;
   private country : string = "";
   private endpoint : string = "";
   constructor(private topNewsServices : TopNewsService,
@@ -33,10 +32,12 @@ export class TopNewsComponent implements OnInit {
 
   ngOnInit() {
     if(localStorage.getItem("gbChecked") == "true") {
+      this.country = "Great Britain"
       this.endpoint = TOP_NEWS_ENDPOINT_GB;
     }
  
     if(localStorage.getItem("gbChecked") == "false") {
+      this.country = "United States"
      this.endpoint = TOP_NEWS_ENDPOINT_US;
    }
         this.topNewsServices.getTopNews(this.endpoint).subscribe(
@@ -45,6 +46,12 @@ export class TopNewsComponent implements OnInit {
         this.loading = false;
       }
     )
+  }
+
+  setArticle(news:any) {
+    localStorage.setItem("title", news.title);
+    localStorage.setItem("content", news.content);
+    localStorage.setItem("urlToImage", news.urlToImage);
   }
 
 }

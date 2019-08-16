@@ -1,3 +1,18 @@
-<p>
-  article works!
-</p>
+<div class="articleDiv" style="width: 85%">
+<div align="center">
+  <h3><b>{{article.title}}</b></h3>
+</div>
+
+<div>
+    <img [src]="article.urlToImage != null ? article.urlToImage : './assets/nophoto.jpg'" style="width: 100%; height: 100%"/>
+</div>
+
+<div class="contentDiv">
+    {{article.content != 'null' ? article.content.substring(0,260) : noContent}}
+    {{article.content != 'null' ? article.content.substring(0,260) : noContent}}
+    {{article.content != 'null' ? article.content.substring(0,260) : noContent}}
+    {{article.content != 'null' ? article.content.substring(0,260) : noContent}}
+    {{article.content != 'null' ? article.content.substring(0,260) : noContent}}
+    {{article.content != 'null' ? article.content.substring(0,260) : noContent}}
+</div>
+</div>
