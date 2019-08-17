@@ -8,6 +8,7 @@ import {SharedService} from "../../services/shared/shared.service"
 export class ArticleComponent implements OnInit, OnDestroy {
 
   private article : any = {}
+  private urlToNoPhoto ='./../assets/nophoto.jpg'
   private noContent : string = "This article has not content!"
   constructor(private sharedService:SharedService) {
     this.sharedService.lanButtonsDisabled = true;

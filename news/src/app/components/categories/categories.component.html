@@ -1,43 +1,116 @@
-<div class="spinner-border centeredSpinner" role="status" *ngIf="loadingEntertainments">
-    <span class="sr-only">Loading...</span>
-  </div>
-<div *ngFor="let entertainment of entertainments">
-    {{entertainment.title}}
-</div>
---------
-<div class="spinner-border centeredSpinner" role="status" *ngIf="loadingGenerals">
-    <span class="sr-only">Loading...</span>
-  </div>
-<div *ngFor="let general of generals">
-    {{general.title}}
-</div>
---------
-<div class="spinner-border centeredSpinner" role="status" *ngIf="loadingHealts">
-    <span class="sr-only">Loading...</span>
-  </div>
-<div *ngFor="let health of healths">
-    {{health.title}}
-</div>
---------
-<div class="spinner-border centeredSpinner" role="status" *ngIf="loadingScience">
-    <span class="sr-only">Loading...</span>
-  </div>
-<div *ngFor="let scienceArticle of science">
-    {{scienceArticle.title}}
-</div>
---------
-<div class="spinner-border centeredSpinner" role="status" *ngIf="loadingSports">
-    <span class="sr-only">Loading...</span>
-  </div>
-<div *ngFor="let sport of sports">
-    {{sport.title}}
-</div>
---------
-<div class="spinner-border centeredSpinner" role="status" *ngIf="loadingTechnologies">
-    <span class="sr-only">Loading...</span>
-  </div>
-<div *ngFor="let technology of technologies">
-    {{technology.title}}
+<div class="titleDiv">
+  Top 5 news by category
 </div>
 
+<div align="center" class="wholeContentDiv">
+    <div class="articleTitleDiv">
+        &#183;Top 5 news by category : Entertainment
+      </div>
+  <button class="arrowButton" (click)="moveLeft('entertainmentsDivId')" *ngIf="!loadingEntertainments"> &lt; </button>
+  <div class="spinner-border" role="status" *ngIf="loadingEntertainments">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="categoriesDiv" align="center" id="entertainmentsDivId" *ngIf="!loadingEntertainments">
+    <div *ngFor="let entertainment of entertainments" class="categoryDiv">
+      <div> <b>{{entertainment.title}}</b> </div>
+      <div><img [src]="entertainment.urlToImage != null ? entertainment.urlToImage : './assets/nophoto.jpg'"
+          style="width: 100%; height: 100%" /></div>
+      <div>
+        {{entertainment.description != null || entertainment.description != "" ? entertainment.description : noContentMessage}}
+      </div>
+      <div class="moreDiv"> <a routerLink="/article" (click)="setArticle(entertainment)">More > </a></div>
+    </div>
+  </div>
+  <button class="arrowButton" (click)="moveRight('entertainmentsDivId')" *ngIf="!loadingEntertainments"> &gt; </button>
 
+
+  <div class="articleTitleDiv">
+      &#183;Top 5 news by category : General
+    </div>
+  <button class="arrowButton" (click)="moveLeft('generalDivId')" *ngIf="!loadingGenerals"> &lt; </button>
+  <div class="spinner-border" role="status" *ngIf="loadingGenerals">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="categoriesDiv" align="center" id="generalDivId" *ngIf="!loadingGenerals">
+    <div *ngFor="let general of generals" class="categoryDiv">
+      <div> <b>{{general.title}}</b> </div>
+      <div><img [src]="general.urlToImage != null ? general.urlToImage : './assets/nophoto.jpg'"
+          style="width: 100%; height: 100%" /></div>
+      <div> {{general.description != null || general.description != "" ? general.description : noContentMessage}}</div>
+      <div class="moreDiv"> <a routerLink="/article" (click)="setArticle(general)">More > </a></div>
+    </div>
+  </div>
+  <button class="arrowButton" (click)="moveRight('generalDivId')" *ngIf="!loadingGenerals"> &gt; </button>
+
+  <div class="articleTitleDiv">
+      &#183;Top 5 news by category : Health
+    </div>
+  <button class="arrowButton" (click)="moveLeft('healthDivId')" *ngIf="!loadingHealts"> &lt; </button>
+  <div class="spinner-border" role="status" *ngIf="loadingHealth">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="categoriesDiv" align="center" id="healthDivId" *ngIf="!loadingHealts">
+    <div *ngFor="let health of healths" class="categoryDiv">
+      <div> <b>{{health.title}}</b> </div>
+      <div><img [src]="health.urlToImage != null ? health.urlToImage : './assets/nophoto.jpg'"
+          style="width: 100%; height: 100%" /></div>
+      <div> {{health.description != null || health.description != "" ? health.description : noContentMessage}}</div>
+      <div class="moreDiv"> <a routerLink="/article" (click)="setArticle(health)">More > </a></div>
+    </div>
+  </div>
+  <button class="arrowButton" (click)="moveRight('healthDivId')" *ngIf="!loadingHealts"> &gt; </button>
+
+  <div class="articleTitleDiv">
+      &#183;Top 5 news by category : Science
+    </div>
+  <button class="arrowButton" (click)="moveLeft('scienceDivId')" *ngIf="!loadingScience"> &lt; </button>
+  <div class="spinner-border" role="status" *ngIf="loadingScience">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="categoriesDiv" align="center" id="scienceDivId" *ngIf="!loadingScience">
+    <div *ngFor="let scienceArticle of science" class="categoryDiv">
+      <div> <b>{{scienceArticle.title}}</b> </div>
+      <div><img [src]="scienceArticle.urlToImage != null ? scienceArticle.urlToImage : './assets/nophoto.jpg'"
+          style="width: 100%; height: 100%" /></div>
+      <div> {{scienceArticle.description != null || scienceArticle.description != "" ? scienceArticle.description : noContentMessage}}</div>
+      <div class="moreDiv"> <a routerLink="/article" (click)="setArticle(scienceArticle)">More > </a></div>
+    </div>
+  </div>
+  <button class="arrowButton" (click)="moveRight('scienceDivId')" *ngIf="!loadingScience"> &gt; </button>
+
+  <div class="articleTitleDiv">
+      &#183;Top 5 news by category : Sport
+    </div>
+  <button class="arrowButton" (click)="moveLeft('sportDivId')" *ngIf="!loadingSports"> &lt; </button>
+  <div class="spinner-border" role="status" *ngIf="loadingSports">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="categoriesDiv" align="center" id="sportDivId" *ngIf="!loadingSports">
+    <div *ngFor="let sport of sports" class="categoryDiv">
+      <div> <b>{{sport.title}}</b> </div>
+      <div><img [src]="sport.urlToImage != null ? sport.urlToImage : './assets/nophoto.jpg'"
+          style="width: 100%; height: 100%" /></div>
+      <div> {{sport.description != null || sport.description != "" ? sport.description : noContentMessage}}</div>
+      <div class="moreDiv"> <a routerLink="/article" (click)="setArticle(sport)">More > </a></div>
+    </div>
+  </div>
+  <button class="arrowButton" (click)="moveRight('sportDivId')" *ngIf="!loadingSports"> &gt; </button>
+
+  <div class="articleTitleDiv">
+      &#183;Top 5 news by category : Technology
+    </div>
+  <button class="arrowButton" (click)="moveLeft('technologyDivId')" *ngIf="!loadingTechnologies"> &lt; </button>
+  <div class="spinner-border" role="status" *ngIf="loadingTechnologies">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="categoriesDiv" align="center" id="technologyDivId" *ngIf="!loadingTechnologies">
+    <div *ngFor="let technology of technologies" class="categoryDiv">
+      <div> <b>{{technology.title}}</b> </div>
+      <div><img [src]="technology.urlToImage != null ? technology.urlToImage : './assets/nophoto.jpg'"
+          style="width: 100%; height: 100%" /></div>
+      <div> {{technology.description != null || technology.description != "" ? technology.description : noContentMessage}}</div>
+      <div class="moreDiv"> <a routerLink="/article" (click)="setArticle(technology)">More > </a></div>
+    </div>
+  </div>
+  <button class="arrowButton" (click)="moveRight('technologyDivId')" *ngIf="!loadingTechnologies"> &gt; </button>
+</div>

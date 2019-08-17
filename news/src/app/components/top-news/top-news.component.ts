@@ -14,7 +14,7 @@ export class TopNewsComponent implements OnInit {
 
   private topNews : any = {};
   private loading : boolean = true;
-  private noContentMessage : string = "This article has no content!"
+  private noContentMessage : string = "This article has no description!"
   private country : string = "";
   private endpoint : string = "";
   constructor(private topNewsServices : TopNewsService,

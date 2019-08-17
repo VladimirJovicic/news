@@ -10,6 +10,9 @@ import { ActivatedRoute,Router,NavigationStart } from '@angular/router';
 })
 export class CategoriesComponent implements OnInit {
 
+  private noContentMessage : string = "This article has no content!"
+  private scrollLeftMovement : number = 100;
+
   private entertainments : any = [];
   private generals : any = [];
   private healths : any = [];
@@ -111,8 +114,22 @@ export class CategoriesComponent implements OnInit {
           this.loadingTechnologies = false;
         });
     }
+  }
 
+  moveLeft(articleId:string) {
+      const left = document.getElementById(articleId).scrollLeft;
+      document.getElementById(articleId).scrollLeft = left - this.scrollLeftMovement;
+  }
 
+  moveRight(articleId:string) {
+    const left = document.getElementById(articleId).scrollLeft;
+    document.getElementById(articleId).scrollLeft = left + this.scrollLeftMovement;
+  }
+
+  setArticle(news:any) {
+    localStorage.setItem("title", news.title);
+    localStorage.setItem("content", news.content);
+    localStorage.setItem("urlToImage", news.urlToImage);
   }
 
 }
