@@ -18,7 +18,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
     this.article.title = localStorage.getItem("title");
     this.article.content = localStorage.getItem("content");
     this.article.urlToImage = localStorage.getItem("urlToImage");
-    console.log(this.article)
   }
 
   ngOnDestroy() {

@@ -10,10 +10,5 @@ export class SharedService {
 
   setGbChecker(newStatus : boolean) {
     this.gbChecked = newStatus;
-    if(this.gbChecked) {
-      localStorage.setItem("gbChecked", "true")
-    }else {
-      localStorage.setItem("gbChecked", "false")
-    }
   }
 }

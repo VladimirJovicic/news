@@ -1,0 +1,12 @@
+<div class="mainContent">
+  <div class="titleDiv" *ngIf="!loading">Top {{category}} news from {{countryName}}</div>
+  <div class="spinner-border centeredSpinner" role="status" *ngIf="loading">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div *ngFor="let news of topNews.articles" class="singleNews">
+    <div> <b>{{news.title}}</b> </div>
+    <div><img [src]="news.urlToImage != null ? news.urlToImage : './assets/nophoto.jpg'" style="width: 100%; height: 100%"/></div>
+    <div> {{news.description != null || news.description != "" ? news.description : noContentMessage}}</div>
+    <div class="moreDiv"> <a routerLink="/article" (click)="setArticle(news)">More > </a></div>
+  </div>
+</div>

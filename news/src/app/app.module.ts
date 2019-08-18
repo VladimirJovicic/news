@@ -8,6 +8,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ArticleComponent } from './components/article/article.component';
 import {SharedService} from './services/shared/shared.service';
+import { CategoryComponent } from './components/category/category.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import {SharedService} from './services/shared/shared.service';
     TopNewsComponent,
     CategoriesComponent,
     NavbarComponent,
-    ArticleComponent
+    ArticleComponent,
+    CategoryComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

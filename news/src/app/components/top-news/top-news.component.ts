@@ -34,11 +34,13 @@ export class TopNewsComponent implements OnInit {
     if(localStorage.getItem("gbChecked") == "true") {
       this.country = "Great Britain"
       this.endpoint = TOP_NEWS_ENDPOINT_GB;
+      this.sharedService.setGbChecker(true);
     }
  
     if(localStorage.getItem("gbChecked") == "false") {
       this.country = "United States"
      this.endpoint = TOP_NEWS_ENDPOINT_US;
+     this.sharedService.setGbChecker(false);
    }
         this.topNewsServices.getTopNews(this.endpoint).subscribe(
       (data:any)=> {

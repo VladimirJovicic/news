@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from "./../../services/category/category.service";
-import { ActivatedRoute,Router,NavigationStart } from '@angular/router';
+import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
 
 @Component({
   selector: 'app-categories',
@@ -10,26 +10,36 @@ import { ActivatedRoute,Router,NavigationStart } from '@angular/router';
 })
 export class CategoriesComponent implements OnInit {
 
-  private noContentMessage : string = "This article has no content!"
-  private scrollLeftMovement : number = 100;
+  private noContentMessage: string = "This article has no content!"
+  private scrollLeftMovement: number = 100;
+  private selectedCounty : string = "";
 
-  private entertainments : any = [];
-  private generals : any = [];
-  private healths : any = [];
-  private science : any = [];
-  private sports : any = [];
-  private technologies : any = [];
+  private entertainments: any = [];
+  private generals: any = [];
+  private healths: any = [];
+  private science: any = [];
+  private sports: any = [];
+  private technologies: any = [];
 
-  private loadingEntertainments : boolean = true;
-  private loadingGenerals : boolean = true;
-  private loadingHealts : boolean = true;
-  private loadingScience : boolean = true;
-  private loadingSports : boolean = true;
-  private loadingTechnologies : boolean = true;
+  private loadingEntertainments: boolean = true;
+  private loadingGenerals: boolean = true;
+  private loadingHealts: boolean = true;
+  private loadingScience: boolean = true;
+  private loadingSports: boolean = true;
+  private loadingTechnologies: boolean = true;
 
-  constructor(private categoryService: CategoryService, private router:Router) {
+  private entertainmentsCollapse: boolean = false;
+  private generalsCollapse: boolean = false;
+  private healtsCollapse: boolean = false;
+  private scienceCollapse: boolean = false;
+  private sportsCollapse: boolean = false;
+  private technologiesCollapse: boolean = false;
+
+  private country: string = "";
+
+  constructor(private categoryService: CategoryService, private router: Router) {
     router.events.forEach((event) => {
-      if(event instanceof NavigationStart) {
+      if (event instanceof NavigationStart) {
         this.ngOnInit();
         this.entertainments = [];
         this.generals = [];
@@ -46,90 +56,132 @@ export class CategoriesComponent implements OnInit {
         this.loadingTechnologies = true;
       }
     });
-   }
+  }
 
   ngOnInit() {
     if (localStorage.getItem("gbChecked") == "false") {
       this.categoryService.getEntertainmentUS().subscribe(
         (data: any) => {
-          this.entertainments = data.articles.slice(0,5);
+          this.entertainments = data.articles.slice(0, 5);
           this.loadingEntertainments = false;
         });
       this.categoryService.getGeneralUS().subscribe(
         (data: any) => {
-          this.generals = data.articles.slice(0,5);
+          this.generals = data.articles.slice(0, 5);
           this.loadingGenerals = false;
         });
       this.categoryService.getHealthUS().subscribe(
         (data: any) => {
-          this.healths = data.articles.slice(0,5);
+          this.healths = data.articles.slice(0, 5);
           this.loadingHealts = false;
         });
       this.categoryService.getScienceUS().subscribe(
         (data: any) => {
-          this.science= data.articles.slice(0,5);
+          this.science = data.articles.slice(0, 5);
           this.loadingScience = false;
         });
       this.categoryService.getSportUS().subscribe(
         (data: any) => {
-          this.sports = data.articles.slice(0,5);
+          this.sports = data.articles.slice(0, 5);
           this.loadingSports = false;
         });
       this.categoryService.getTechnologyUS().subscribe(
         (data: any) => {
-          this.technologies = data.articles.slice(0,5);
+          this.technologies = data.articles.slice(0, 5);
           this.loadingTechnologies = false;
         });
+      this.country = 'us';
+      this.selectedCounty = "United Stated"
     }
 
     if (localStorage.getItem("gbChecked") == "true") {
       this.categoryService.getEntertainmentGB().subscribe(
         (data: any) => {
-          this.entertainments = data.articles.slice(0,5);
+          this.entertainments = data.articles.slice(0, 5);
           this.loadingEntertainments = false;
         });
       this.categoryService.getGeneralGB().subscribe(
         (data: any) => {
-          this.generals = data.articles.slice(0,5);
+          this.generals = data.articles.slice(0, 5);
           this.loadingGenerals = false;
         });
       this.categoryService.getHealthGB().subscribe(
         (data: any) => {
-          this.healths = data.articles.slice(0,5);
+          this.healths = data.articles.slice(0, 5);
           this.loadingHealts = false;
         });
       this.categoryService.getScienceGB().subscribe(
         (data: any) => {
-          this.science= data.articles.slice(0,5);
+          this.science = data.articles.slice(0, 5);
           this.loadingScience = false;
         });
       this.categoryService.getSportGB().subscribe(
         (data: any) => {
-          this.sports = data.articles.slice(0,5);
+          this.sports = data.articles.slice(0, 5);
           this.loadingSports = false;
         });
       this.categoryService.getTechnologyGB().subscribe(
         (data: any) => {
-          this.technologies = data.articles.slice(0,5);
+          this.technologies = data.articles.slice(0, 5);
           this.loadingTechnologies = false;
         });
+      this.country = 'gb';
+      this.selectedCounty = "Great Britain"
     }
   }
 
-  moveLeft(articleId:string) {
-      const left = document.getElementById(articleId).scrollLeft;
-      document.getElementById(articleId).scrollLeft = left - this.scrollLeftMovement;
+  moveLeft(articleId: string) {
+    const left = document.getElementById(articleId).scrollLeft;
+    document.getElementById(articleId).scrollLeft = left - this.scrollLeftMovement;
   }
 
-  moveRight(articleId:string) {
+  moveRight(articleId: string) {
     const left = document.getElementById(articleId).scrollLeft;
     document.getElementById(articleId).scrollLeft = left + this.scrollLeftMovement;
   }
 
-  setArticle(news:any) {
+  setArticle(news: any) {
     localStorage.setItem("title", news.title);
     localStorage.setItem("content", news.content);
     localStorage.setItem("urlToImage", news.urlToImage);
   }
+
+  getCollapseUrl() {
+    return "url('../assets/collapse.png')"
+  }
+
+  getExpandeUrl() {
+    return "url('../assets/expand.png')"
+  }
+
+  collapseExpand(keyword: string) {
+    switch (keyword) {
+      case "entertainment":
+        this.entertainmentsCollapse = !this.entertainmentsCollapse;
+        break;
+
+      case "general":
+        this.generalsCollapse = !this.generalsCollapse;
+        break;
+
+      case "sport":
+        this.sportsCollapse = !this.sportsCollapse;
+        break;
+
+      case "science":
+        this.scienceCollapse = !this.scienceCollapse;
+        break;
+
+      case "health":
+        this.healtsCollapse = !this.healtsCollapse;
+        break;
+
+      case "technology":
+        this.technologiesCollapse = !this.technologiesCollapse;
+        break;
+    }
+
+  }
+
 
 }
