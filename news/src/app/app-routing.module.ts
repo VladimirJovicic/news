@@ -4,13 +4,15 @@ import {TopNewsComponent} from "./components/top-news/top-news.component";
 import {CategoriesComponent} from "./components/categories/categories.component";
 import {ArticleComponent} from './components/article/article.component';
 import {CategoryComponent} from './components/category/category.component';
+import {SearchComponent} from './components/search/search.component';
 
 const routes: Routes = [
   { path: '', component: TopNewsComponent, pathMatch:"full" },
   { path: 'top-news/:country', component: TopNewsComponent },
   { path: 'categories/:country', component: CategoriesComponent },
   { path: 'article', component: ArticleComponent },
-  { path: 'category/:categoryName/:country', component: CategoryComponent }
+  { path: 'category/:categoryName/:country', component: CategoryComponent },
+  { path: 'search/:country', component: SearchComponent }
 ];
 
 @NgModule({

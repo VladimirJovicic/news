@@ -25,22 +25,32 @@ export class TopNewsComponent implements OnInit {
         if(event instanceof NavigationStart) {
           this.loading = true;
           this.topNews = {};
+          this.activatedRoute.params.subscribe(params => {
+            this.country = params['country'];
+            if(params['country'] == "us") {
+              this.sharedService.gbChecked = false;
+            }
+            if(params['country'] == "gb") {
+              this.sharedService.gbChecked = true;
+            }
+          });
           this.ngOnInit();
         }
       });
   }
 
   ngOnInit() {
-    if(localStorage.getItem("gbChecked") == "true") {
-      this.country = "Great Britain"
+    this.activatedRoute.params.subscribe(params => {
+      this.country = params['country'];
+    });
+    if(this.country == "gb") {
       this.endpoint = TOP_NEWS_ENDPOINT_GB;
-      this.sharedService.setGbChecker(true);
+      this.sharedService.gbChecked = true;
     }
  
-    if(localStorage.getItem("gbChecked") == "false") {
-      this.country = "United States"
+    if(this.country == "us") {
      this.endpoint = TOP_NEWS_ENDPOINT_US;
-     this.sharedService.setGbChecker(false);
+     this.sharedService.gbChecked = false;
    }
         this.topNewsServices.getTopNews(this.endpoint).subscribe(
       (data:any)=> {

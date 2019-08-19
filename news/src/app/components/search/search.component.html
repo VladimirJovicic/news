@@ -1,3 +1,27 @@
-<p>
-  search works!
-</p>
+<div class="titleDiv">
+  Search
+</div>
+
+<form class="searchForm" (ngSubmit)="submitForm($event)">
+  <div class="form-group">
+    <label for="searchFor" class="labelForm">Insert query</label>
+    <input type="text"  [(ngModel)]="query" [ngModelOptions]="{standalone: true}" class="form-control" id="searchFor" placeholder="Search...">
+  </div>
+  <button class="btn btn-primary">Submit</button>
+</form>
+
+<div class="spinner-border centeredSpinner" role="status" *ngIf="loading">
+    <span class="sr-only">Loading...</span>
+  </div>
+<div *ngIf="!loading && showResults && searchResults.length>0 " class="mainContent">
+    <div *ngFor="let news of searchResults" class="singleNews">
+        <div> <b>{{news.title}}</b> </div>
+        <div><img [src]="news.urlToImage != null ? news.urlToImage : './assets/nophoto.jpg'" style="width: 100%; height: 100%"/></div>
+        <div> {{news.description != null || news.description != "" ? news.description : noContentMessage}}</div>
+        <div class="moreDiv"> <a routerLink="/article" (click)="setArticle(news)">More > </a></div>
+      </div>
+</div>
+
+<div *ngIf="!loading && showResults && searchResults.length==0 " class="titleDiv">
+   No results for the given query : "{{displayQuery}}"
+</div>

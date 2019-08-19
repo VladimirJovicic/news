@@ -1,0 +1,24 @@
+.titleDiv {
+    text-align: center;
+    width: 100%;
+    color: wheat;
+    font-size: 200%;
+    font-weight: bold;
+    margin-bottom: 5%;
+}
+
+.searchForm {
+    display: table;
+    margin: auto;
+    width: 50%;
+}
+
+.labelForm {
+    font-weight: bold;
+    color: wheat;
+}
+
+.centeredSpinner {
+    display: table;
+    margin: auto;
+}

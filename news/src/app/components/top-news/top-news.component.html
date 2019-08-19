@@ -1,5 +1,5 @@
 <div class="mainContent">
-  <div class="titleDiv" *ngIf="!loading">Top news from {{country}}</div>
+  <div class="titleDiv" *ngIf="!loading">Top news from {{sharedService.gbChecked ? 'Great Britain' : 'United States'}}</div>
   <div class="spinner-border centeredSpinner" role="status" *ngIf="loading">
     <span class="sr-only">Loading...</span>
   </div>

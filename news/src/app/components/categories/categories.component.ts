@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from "./../../services/category/category.service";
 import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
+import {SharedService} from './../../services/shared/shared.service'
 
 @Component({
   selector: 'app-categories',
@@ -12,7 +13,6 @@ export class CategoriesComponent implements OnInit {
 
   private noContentMessage: string = "This article has no content!"
   private scrollLeftMovement: number = 100;
-  private selectedCounty : string = "";
 
   private entertainments: any = [];
   private generals: any = [];
@@ -37,10 +37,22 @@ export class CategoriesComponent implements OnInit {
 
   private country: string = "";
 
-  constructor(private categoryService: CategoryService, private router: Router) {
+  constructor(private categoryService: CategoryService, 
+    private router: Router, 
+    private activatedRoute:ActivatedRoute,
+    private sharedService:SharedService) {
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
-        this.ngOnInit();
+        this.activatedRoute.params.subscribe(params => {
+          if(params['country'] == "us") {
+            this.sharedService.gbChecked = false;
+            this.country = "us";
+          }
+          if(params['country'] == "gb") {
+            this.sharedService.gbChecked = true;
+            this.country = "gb";
+          }
+        });
         this.entertainments = [];
         this.generals = [];
         this.healths = [];
@@ -54,12 +66,24 @@ export class CategoriesComponent implements OnInit {
         this.loadingScience = true;
         this.loadingSports = true;
         this.loadingTechnologies = true;
+        this.ngOnInit();
       }
     });
   }
 
   ngOnInit() {
-    if (localStorage.getItem("gbChecked") == "false") {
+    this.activatedRoute.params.subscribe(params => {
+      this.country = params['country'];
+      if(params['country'] == "us") {
+        this.sharedService.gbChecked = false;
+        this.country = "us";
+      }
+      if(params['country'] == "gb") {
+        this.sharedService.gbChecked = true;
+        this.country = "gb";
+      }
+    });
+    if (!this.sharedService.gbChecked) {
       this.categoryService.getEntertainmentUS().subscribe(
         (data: any) => {
           this.entertainments = data.articles.slice(0, 5);
@@ -89,12 +113,10 @@ export class CategoriesComponent implements OnInit {
         (data: any) => {
           this.technologies = data.articles.slice(0, 5);
           this.loadingTechnologies = false;
-        });
-      this.country = 'us';
-      this.selectedCounty = "United Stated"
+        }); 
     }
 
-    if (localStorage.getItem("gbChecked") == "true") {
+    if (this.sharedService.gbChecked) {
       this.categoryService.getEntertainmentGB().subscribe(
         (data: any) => {
           this.entertainments = data.articles.slice(0, 5);
@@ -125,8 +147,6 @@ export class CategoriesComponent implements OnInit {
           this.technologies = data.articles.slice(0, 5);
           this.loadingTechnologies = false;
         });
-      this.country = 'gb';
-      this.selectedCounty = "Great Britain"
     }
   }
 

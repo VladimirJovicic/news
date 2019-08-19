@@ -23,6 +23,17 @@ export class CategoryComponent implements OnInit {
     private router:Router) { 
       router.events.forEach((event) => {
         if (event instanceof NavigationStart) {
+          this.activatedRoute.params.subscribe(params => {
+            this.category = params['categoryName'];
+            this.country = params['country'];
+          });
+          if(this.country == "gb") {
+            this.sharedService.gbChecked = true;
+          }
+       
+          if(this.country == "us") {
+           this.sharedService.gbChecked = false;
+         }
           this.topNews = {};
           this.loading = true;
           this.country = "";
@@ -39,17 +50,14 @@ export class CategoryComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.category = params['categoryName'];
       this.country = params['country'];
-      console.log(this.category);
-      console.log(this.country);
     });
-
-    if(this.country == "us") {
-      localStorage.setItem("gbChecked","false")
-    }
     if(this.country == "gb") {
-      localStorage.setItem("gbChecked","true")
+      this.sharedService.gbChecked = true;
     }
-
+ 
+    if(this.country == "us") {
+     this.sharedService.gbChecked = false;
+   }
     if (this.country == 'us') {
       this.countryName = "United States";
       if (this.category == "entertainment") {

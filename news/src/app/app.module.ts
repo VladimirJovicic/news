@@ -9,7 +9,9 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ArticleComponent } from './components/article/article.component';
 import {SharedService} from './services/shared/shared.service';
 import { CategoryComponent } from './components/category/category.component';
-import { SearchComponent } from './search/search.component';
+import { SearchComponent } from './components/search/search.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { SearchComponent } from './search/search.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [HttpClientModule, SharedService],
   bootstrap: [AppComponent]
